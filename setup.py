@@ -30,15 +30,20 @@ class Tester(Command):
                 from unittest2 import TextTestRunner, defaultTestLoader
             else:
                 from unittest import TextTestRunner, defaultTestLoader
+                
         except ImportError:
             print("Please install Unittest2 to run the test suite")
             exit(-1)
-        from tests import test_aspell_python, test_aspell_for_python_2
+
+        from tests import test_aspell_python
         suite = defaultTestLoader.loadTestsFromModule(test_aspell_python)
         if sys.version_info < (3,):
+            from tests import test_aspell_for_python_2
             suite.addTests(defaultTestLoader.loadTestsFromModule(test_aspell_for_python_2))
         else:
-            pass
+            from tests import test_aspell_for_python_3
+            suite.addTests(defaultTestLoader.loadTestsFromModule(test_aspell_for_python_3))
+
         runner = TextTestRunner()
         result = runner.run(suite)
         if result.wasSuccessful() is not True:

@@ -3,3 +3,4 @@ include README.rst
 include CONTRIBUTORS.txt
 
 recursive-include tests *.py
+recursive-include src *.c

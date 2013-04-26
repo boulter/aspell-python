@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import with_statement
-
 import os
 import sys
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest as unittest
+from unittest import skip
 
 import aspell
 
@@ -16,7 +10,7 @@ from tests.test_aspell_python import TestBase
 
 
 class TestCheckMethod(TestBase):
-    """test check method"""
+    "test check method"
 
     def test_ok(self):
         words = ['word', 'flower', 'tree', 'rock', 'cat', 'winter']
@@ -29,19 +23,19 @@ class TestCheckMethod(TestBase):
             self.assertFalse(self.speller.check(word))
 
 
-    # def test_in(self):
-    #     words = ['word', 'flower', 'tree', 'rock', 'cat', 'winter']
-    #     for word in words:
-    #         self.assertTrue(word in self.speller)
-    # 
-    # def test_notin(self):
-    #     words = ['misteke', 'zo', 'tre', 'bicyle']
-    #     for word in words:
-    #         self.assertFalse(word in self.speller)
-    #         self.assertTrue(word not in self.speller)
+    def test_in(self):
+        words = ['word', 'flower', 'tree', 'rock', 'cat', 'winter']
+        for word in words:
+            self.assertTrue(word in self.speller)
+    
+    def test_notin(self):
+        words = ['misteke', 'zo', 'tre', 'bicyle']
+        for word in words:
+            self.assertFalse(word in self.speller)
+            self.assertTrue(word not in self.speller)
 
 
-
+@skip
 class TestSuggestMethod(TestBase):
     def test(self):
         pairs = {
@@ -52,24 +46,25 @@ class TestSuggestMethod(TestBase):
 
         for incorrect, correct in pairs.items():
             sug = self.speller.suggest(incorrect)
-            #self.assertEqual(sug[0], correct)
+            self.assertEqual(sug[0], correct)
 
 
+@skip
 class TestAddReplacementMethod(TestBase):
     def test(self):
-        """addReplacement affects on order of words returing by suggest"""
+        "addReplacement affects on order of words returing by suggest"
 
         wrong       = 'fakewrod'
         correct     = 'Fakewood'    # first suggestion after altering order
 
         sug = self.speller.suggest(wrong)
-        #self.assertTrue(sug[0] != wrong)
+        self.assertTrue(sug[0] != wrong)
         
         self.speller.addReplacement(wrong, correct)
         
         sug = self.speller.suggest(wrong)
-        #print sug
-        #self.assertTrue(correct in sug)
+        #print(sug)
+        self.assertTrue(correct in sug)
 
 
 class TestaddtoSession(TestBase):
