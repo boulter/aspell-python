@@ -16,14 +16,14 @@ import aspell
 def config_dict(speller):
     """Speller configuration as dictionary"""
     if sys.version_info < (3,):
-        config  = dict(
-            (name, value) for (name, type, value) in
-                speller.ConfigKeys()
+        config = dict(
+            ((name, value) for (name, type, value) in
+                speller.ConfigKeys())
         )
     else:
-        config  = dict(
-            (name, value) for name, (type, value, desc) in
-                speller.ConfigKeys().items()
+        config = dict(
+            ((name, value) for name, (type, value, desc) in
+                speller.ConfigKeys().items())
         )
     return config
 

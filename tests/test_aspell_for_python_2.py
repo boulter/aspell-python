@@ -33,7 +33,7 @@ class TestCheckMethod(TestBase):
     #     words = ['word', 'flower', 'tree', 'rock', 'cat', 'winter']
     #     for word in words:
     #         self.assertTrue(word in self.speller)
-    # 
+    #
     # def test_notin(self):
     #     words = ['misteke', 'zo', 'tre', 'bicyle']
     #     for word in words:
@@ -41,13 +41,12 @@ class TestCheckMethod(TestBase):
     #         self.assertTrue(word not in self.speller)
 
 
-
 class TestSuggestMethod(TestBase):
     def test(self):
         pairs = {
-            'wrod'  : 'trod',
-            'tre'   : 'tree',
-            'xoo'   : 'zoo',
+            'wrod': 'trod',
+            'tre': 'tree',
+            'xoo': 'zoo',
         }
 
         for incorrect, correct in pairs.items():
@@ -59,14 +58,14 @@ class TestAddReplacementMethod(TestBase):
     def test(self):
         """addReplacement affects on order of words returing by suggest"""
 
-        wrong       = 'fakewrod'
-        correct     = 'Fakewood'    # first suggestion after altering order
+        wrong = 'fakewrod'
+        correct = 'Fakewood'  # first suggestion after altering order
 
         sug = self.speller.suggest(wrong)
         #self.assertTrue(sug[0] != wrong)
-        
+
         self.speller.addReplacement(wrong, correct)
-        
+
         sug = self.speller.suggest(wrong)
         #print sug
         #self.assertTrue(correct in sug)
@@ -74,7 +73,7 @@ class TestAddReplacementMethod(TestBase):
 
 class TestaddtoSession(TestBase):
     def test(self):
-        
+
         # aspell dosn't know any of these words
         for word in self.polish_words:
             self.assertFalse(self.speller.check(word))
@@ -108,7 +107,7 @@ class TestSessionwordlist(TestBase):
         # fill
         for word in self.polish_words:
             self.speller.addtoSession(word)
-        
+
         # test - all correct
         swl = self.speller.getSessionwordlist()
         self.assertEqual(set(swl), set(self.polish_words))
@@ -122,19 +121,19 @@ class TestSessionwordlist(TestBase):
 
     def test3(self):
         self.all_incorrect()
-        
+
         for word in self.polish_words:
             self.speller.addtoSession(word)
 
         self.all_correct()
 
         self.speller.clearSession()
-        
+
         self.all_incorrect()
 
 
 class TestPersonalwordlist(TestBase):
-    
+
     def setUp(self):
         TestBase.setUp(self)
         self._clear_personal()
@@ -155,7 +154,7 @@ class TestPersonalwordlist(TestBase):
 
     def test_add(self):
         "addtoPersonal"
-        
+
         for word in self.polish_words:
             self.assertFalse(self.speller.check(word))
 
