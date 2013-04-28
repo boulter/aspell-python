@@ -74,6 +74,8 @@ setup(
     version='1.13',
     ext_modules=[module],
 
+    py_modules=['pyaspell'],
+
     description="Wrapper around GNU Aspell",
     author="Wojciech Muła",
     author_email="wojciech_mula@poczta.onet.pl",

@@ -38,3 +38,12 @@ class TestBase(unittest.TestCase):
         # polish words (cat, tree, spring) not existing in english dict
         self.polish_words = ['kot', 'drzewo', 'wiosna']
         self.config = config_dict(self.speller)
+
+
+class TestPyAspell(unittest.TestCase):
+    def test_importable_pyaspell(self):
+        """Pure python module is importable"""
+        try:
+            import pyaspell
+        except ImportError:
+            self.fail("Pure Python PyAspell is not importable")
