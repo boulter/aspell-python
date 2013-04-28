@@ -15,6 +15,13 @@ import aspell
 from tests.test_aspell_python import TestBase
 
 
+class TestConfiguration(TestBase):
+    def test_config_iterable(self):
+        """The configuration object is iterable"""
+        cfg = aspell.ConfigKeys()
+        self.assertTrue(iter(cfg))
+
+
 class TestCheckMethod(TestBase):
     """test check method"""
 
