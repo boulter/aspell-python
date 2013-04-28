@@ -3,10 +3,23 @@
 import os
 import sys
 from unittest import skip
+import collections
 
 import aspell
 
 from tests.test_aspell_python import TestBase
+
+
+class TestConfiguration(TestBase):
+    def test_config_iterable(self):
+        """The configuration object is iterable"""
+        cfg = aspell.ConfigKeys()
+        self.assertTrue(isinstance(cfg, collections.Iterable))
+
+    def test_config_dict(self):
+        """The configuration object is a dictionary"""
+        cfg = aspell.ConfigKeys()
+        self.assertTrue(isinstance(cfg, collections.Mapping))
 
 
 class TestCheckMethod(TestBase):
